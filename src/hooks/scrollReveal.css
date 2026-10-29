@@ -1,0 +1,30 @@
+/* Scroll reveal states (set by useScrollReveal). `html` raises specificity
+   above each component's own transition/transform rules while animating. */
+html [data-reveal="pending"]{opacity:0;transform:translateY(40px) scale(.95)}
+html [data-reveal="in"]{opacity:1;transform:none;transition:opacity .6s ease-out var(--reveal-delay,0s),transform .6s ease-out var(--reveal-delay,0s)}
+
+/* Page load: header slides down, then hero copy rises in one by one. */
+.header.header-enter{animation:header-slide-down .6s ease-out both}
+@keyframes header-slide-down{from{opacity:0;transform:translateY(-50px)}to{opacity:1;transform:translateY(0)}}
+.hero-content.entering>*{animation:hero-item-rise .6s ease-out both}
+.hero-content.entering>:nth-child(1){animation-delay:.1s}
+.hero-content.entering>:nth-child(2){animation-delay:.2s}
+.hero-content.entering>:nth-child(3){animation-delay:.3s}
+.hero-content.entering>:nth-child(n+4){animation-delay:.4s}
+@keyframes hero-item-rise{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+
+/* Hover micro-interactions */
+html :is(.property-card,.deal-card,.looking-card,.listing-row,.virtual-tour-card,.team-card,.review-card,.team-route-card){transition:transform .3s ease,box-shadow .3s ease,border-color .3s ease}
+html :is(.property-card,.deal-card,.looking-card,.listing-row,.virtual-tour-card,.team-card,.review-card,.team-route-card):hover{transform:scale(1.03)}
+html :is(.gold-button,.outline-button,.latest-more,.review-more,.listing-actions button,.vt-legend button,.vt-controls button,.vt-thumb,.gallery-thumbs>*,.walkthrough-items>button){transition:all .3s ease}
+html :is(.gold-button,.outline-button,.latest-more,.review-more,.listing-actions button,.vt-legend button,.vt-controls button,.vt-thumb,.gallery-thumbs>*,.walkthrough-items>button):hover{transform:scale(1.03)}
+
+@media(prefers-reduced-motion:reduce){
+  html [data-reveal]{opacity:1!important;transform:none!important;transition:none!important}
+  .header.header-enter,.hero-content.entering>*{animation:none}
+  html :is(.property-card,.deal-card,.looking-card,.listing-row,.virtual-tour-card,.team-card,.review-card,.team-route-card,.gold-button,.outline-button,.latest-more,.review-more,.listing-actions button,.vt-legend button,.vt-controls button,.vt-thumb,.gallery-thumbs>*,.walkthrough-items>button):hover{transform:none}
+}
+/* Page change: the new page fades and rises into place (replaces the old loading screen). */
+.page-transition{animation:page-enter .6s cubic-bezier(.22,.8,.24,1) backwards}
+@keyframes page-enter{from{opacity:0;transform:translateY(22px) scale(.985)}to{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){.page-transition{animation:none}}

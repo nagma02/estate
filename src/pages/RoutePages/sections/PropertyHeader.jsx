@@ -1,0 +1,3 @@
+export default function PropertyHeader({ rishita, location }) {
+  return <div className="route-container detail-top"><div className="detail-breadcrumb">Home/Apartment/{rishita ? 'Rishita Manhattan' : 'Nottingham Homz'}</div><div className="detail-heading"><div><h1>{rishita ? 'RISHITA MANHATTAN' : 'NOTTINGHAM HOMZ'}</h1><p>{location}</p><span className="sale-chip">FOR SALE</span><span className="type-chip">{rishita ? 'UNDER CONSTRUCTION' : 'APARTMENT'}</span></div><div className="detail-price"><strong>{rishita ? '₹ 70.53 L - 2.02 CR' : 'STARTING FROM ₹ 28 LACS'}</strong><span>+ Govt. Charges</span><b>RERA APPROVED</b><small>{rishita ? 'RERANo.UPRERAPRJ367744 | www.up-rera.in' : 'www.up-rera.in'}</small></div></div></div>
+}

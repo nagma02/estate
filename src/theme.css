@@ -1,0 +1,372 @@
+/* Site-wide palette layer. Imported after page styles so shared surfaces stay consistent. */
+:root{
+  --green:#0B3A27;
+  --green2:#0B3A27;
+  --emerald:#0B3A27;
+  --gold:#D0A850;
+  --gold2:#D0A850;
+  --cream:#FAF8F5;
+  --sage:#F3EFEA;
+  --soft-sage:#E8F0EC;
+  --champagne:#FAF2E4;
+  --gold-border:#D0A850;
+  --surface:#FFFFFF;
+  --ink:#0B3A27;
+  --muted:#64766C;
+  --serif:var(--serif);
+  color:var(--ink);
+  background:var(--cream);
+}
+html,body,#root{min-height:100%;background:var(--cream);color:var(--ink)}
+html{scroll-behavior:smooth}
+
+/* Fixed brand shell */
+.header.site-header{background:#0B3A27;color:#fff;border-bottom:1px solid #D0A850}
+.site-header .sh-menu,.site-header .sh-link,.site-header .sh-phone{color:#fff}
+.site-header .sh-phone,.site-header .sh-logo{border-color:#D0A850}
+.site-header :is(.sh-phone svg,.sh-phone b,.sh-link svg,.sh-menu:hover,.sh-link:hover){color:#D0A850}
+.drawer{background:#0B3A27;border-left-color:#D0A850}
+.footer{background:#0B3A27;color:#fff}
+.footer-main h4,.footer .footer-social a,.footer .footer-social{color:#D0A850}
+.footer-about p,.footer-contact p,.footer-main>div>a:not(.brand){color:#F1F1E9}
+.associations{border-color:#D0A850;color:#fff}
+.associations span,.footer-bottom a:hover{color:#D0A850}
+.footer-bottom{border-top:1px solid #D0A85066;color:#D7DDD8}
+
+/* Homepage search-led header from the supplied reference. */
+.header.site-header.home-header{height:80px;background:#fff;color:#151515;border-bottom:1px solid #ececec;box-shadow:none}
+.home-header .sh-inner{width:min(1320px,calc(100% - 48px));min-height:80px;flex-wrap:nowrap;padding:0 12px;gap:30px}
+.home-header .sh-logo{width:58px;height:58px;border-radius:0;background:transparent;box-shadow:none}
+.home-header .sh-logo:before{display:none}
+.home-header .sh-logo img{width:54px;height:54px}
+.home-header .sh-location-button,.home-header .sh-phone,.home-header .sh-link,.home-header .sh-menu{color:#151515}
+.home-header .sh-location-button svg,.home-header .sh-phone svg,.home-header .sh-phone b,.home-header .sh-link svg{color:#333}
+.home-header .sh-phone{border-color:#d5d5d5}
+.home-header .sh-phone:hover{background:#f7f7f7;border-color:#aaa}
+.home-header .sh-menu:hover,.home-header .sh-link:hover{color:#d22d91}
+.home-header>.sh-inner>.sh-search{display:none}
+.home-header .sh-actions{gap:18px}
+.home-header .sh-link{font-size:14px}
+
+/* Warm, low-glare body surfaces and alternating section bands */
+main,.route-page,.listing-page,.detail-page,.project-detail-page,.recorded-media-page,.recorded-videos-page,.career-page{background:var(--cream);color:var(--ink)}
+.intro,.team,.virtual-tour-section,.contact,.pdp-page,.listing-content{background:var(--sage)}
+.properties,.recorded-videos-page,.media-masonry,.career-content{background:var(--cream)}
+.section-heading h2,.intro-copy h2,.contact h2,.listing-main h2,.detail-section h2,.pdp-content-section h2{color:var(--ink)}
+.latest-section .section-heading .property-category{color:#000}
+.latest-section .latest-tabs button{color:var(--muted)}
+.latest-section .latest-tabs button.active{color:#000}
+.latest-section .featured-grid{width:100%;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.latest-section .featured-card{min-width:0;padding:0;overflow:hidden;border:1px solid #D0A85066;border-radius:8px;background:#fff;box-shadow:0 8px 24px rgba(0,0,0,.07)}
+.latest-section .featured-card .property-image{aspect-ratio:1.65;position:relative}
+.latest-section .featured-card .property-image img{display:block;width:100%;height:100%;object-fit:cover}
+.featured-launch{position:absolute;top:10px;left:10px;padding:5px 10px;border-radius:20px;background:#D92323;color:#fff;font:500 10px/1.2 var(--sans)}
+.featured-favorite{position:absolute;top:8px;right:9px;display:grid;place-items:center;width:32px;height:32px;border:1px solid #fff;border-radius:50%;background:#0b16184d;color:#fff;font-size:20px;line-height:1;cursor:pointer}
+.featured-favorite.is-favorite{background:#fff;color:#d92355}
+.latest-section .featured-card .property-info{padding:10px 11px 9px;color:var(--ink)}
+.featured-title-row{display:flex;align-items:center;justify-content:space-between;gap:7px}
+.latest-section .featured-title-row h3{min-width:0;margin:0;color:#111;font:600 16px/1.3 var(--sans)}
+.featured-rera{flex:none;padding:4px 8px;border-radius:14px;background:#f0f0f0;color:#555;font:12px var(--sans)}
+.featured-rera b{margin-left:3px;color:#0B3A27}
+.latest-section .featured-card .location{margin:5px 0 0;color:#656565;font:12px/1.3 var(--sans)}
+.featured-spec-row{display:flex;justify-content:space-between;gap:8px;margin-top:8px;padding-bottom:9px;border-bottom:1px solid #e8e8e8;color:#555;font:12px/1.3 var(--sans)}
+.featured-spec-row span:last-child{text-align:right}
+.featured-price-row{display:flex;align-items:center;justify-content:space-between;gap:7px;padding-top:8px}
+.featured-price-row strong{color:#111;font:600 14px/1.3 var(--sans)}
+.featured-price-row button{border:0;border-radius:18px;background:#f2f0f0;color:#c51d68;padding:8px 15px;font:600 12px var(--sans);cursor:pointer}
+.featured-price-row button:hover{background:var(--green);color:#fff}
+.section-subtitle,.intro-copy>p,.contact-grid>div>p,.location,.listing-location,.detail-section p,.pdp-content-section>p{color:var(--muted)}
+
+/* Crisp cards, fine gold edges and quiet shadows */
+.property-card,.listing-row,.team-note,.contact-form,.callback-card,.floor-plans article,
+.pdp-overview-card,.pdp-content-section,.pdp-interest-card,.pdp-popup,.project-facts>div{
+  background:#FFFFFF;
+  border:1px solid #D0A85066;
+  box-shadow:0 10px 30px rgba(0,0,0,.05);
+}
+.listing-row{border-bottom:1px solid #D0A85080}
+.property-meta,.details{border-color:#E2E7E1}
+.property-info h3,.listing-main h2,.stats b{color:var(--ink)}
+.property-tag{background:var(--green);color:#fff}
+.features span,.sale-chip,.type-chip{background:#F9F3E3;color:#856B18;border-color:#D0A85066}
+.price,.pdp-price strong{color:#856B18}
+
+/* Emerald actions with a gold hover; secondary actions remain outlined. */
+.gold-button,.listing-actions button:not(.secondary),.pdp-overview-footer button,
+.pdp-interest-form>button,.callback-card form button,.pdp-scroll-prompt .pdp-prompt-icon{
+  background:var(--emerald);border-color:var(--gold);color:#fff
+}
+.gold-button:hover,.listing-actions button:not(.secondary):hover,.pdp-overview-footer button:hover,
+.pdp-interest-form>button:hover,.callback-card form button:hover{
+  background:var(--gold-foil);border-color:var(--gold);color:var(--green)
+}
+.outline-button,.listing-actions button.secondary,.pdp-outline-cta{
+  background:transparent;border:1px solid var(--green);color:var(--green)
+}
+.outline-button:hover,.listing-actions button.secondary:hover,.pdp-outline-cta:hover{background:var(--green);color:#fff}
+.details{color:var(--green)}
+.details span,.text-link span{color:var(--gold)}
+.tabs button.active{color:var(--green)}
+.tabs button.active:after{background:var(--gold-foil)}
+.pdp-breadcrumb,.pdp-section-nav,.pdp-section-nav button,.pdp-floor-plan-card{background:#fff}
+.pdp-section-nav button:hover,.pdp-section-nav button:focus-visible{border-bottom-color:var(--gold);color:var(--green)}
+.pdp-title-row h1,.pdp-content-section h2,.pdp-interest-card h2{color:var(--ink)}
+.pdp-title-row p,.pdp-interest-card>p{color:var(--muted)}
+.pdp-builder,.pdp-rera{background:#F9F3E3;color:#856B18}
+.pdp-section-kicker{color:#856B18}
+.pdp-interest-card{border-color:#D0A850}
+.pdp-popup{border-top-color:#D0A850}
+.pdp-gallery,.detail-gallery,.project-detail-image{box-shadow:0 10px 30px rgba(0,0,0,.05)}
+.pdp-amenities span,.pdp-spec-grid>div{background:#F1F4F1}
+
+/* Inner pages use the same quiet light canvas; photo-led hero areas remain image-led. */
+.operations-reference,.operations-department,.cmd-route,.about-route,.sales-team-page,
+.policy-page,.career-title-band,.career-form,.contact-page,.recorded-videos-page,
+.walkthrough-heading,.media-karwaan-title{
+  background:var(--cream);color:var(--ink)
+}
+.operations-department{border-bottom:1px solid #D0A85080}
+.operations-department h1,.operations-profile-details h2,.operations-profile-details a,
+.cmd-reference-message>h1,.cmd-reference-message>h2,.about-company>h2,
+.policy-heading h1,.policy-copy h2,.policy-copy h3,.career-title-band h1,
+.career-form h2,.contact-page-form h1,.contact-details h2,.media-karwaan-title h2{
+  color:var(--green)
+}
+.operations-profile-details,.cmd-reference-copy,.policy-copy,.career-contact-info,
+.contact-details,.career-contact-info p,.career-contact-info>a:not(.career-phone){color:var(--muted)}
+.policy-copy:after{color:#D0A85022}
+.career-form,.contact-page-form{background:#fff;border:1px solid #D0A85066;box-shadow:0 10px 30px rgba(0,0,0,.05)}
+.career-fields input,.career-fields select,.career-fields textarea,
+.contact-page-form input:not([type=checkbox]),.contact-page-form textarea{background:#F7F5F0;color:var(--ink)}
+.career-form>button,.contact-page-form>button{background:var(--emerald);border:1px solid var(--gold);color:#fff}
+.career-form>button:hover,.contact-page-form>button:hover{background:var(--gold-foil);color:var(--green)}
+.contact-social a{background:var(--green);color:var(--gold)}
+.media-karwaan-title{border-block:1px solid #D0A85080}
+.route-banner{background:var(--sage);color:var(--ink);border-bottom:1px solid #D0A850}
+.route-banner h1{color:var(--ink)}
+.route-banner p{color:var(--muted)}
+
+/* Keep text from the former dark section styles readable on the new light canvas. */
+.sales-team-member{background:var(--sage);color:var(--ink);border-bottom:1px solid #D0A85066}
+.sales-tone-1,.sales-tone-3{background:#fff}
+.sales-member-copy h2{color:var(--green)}
+.cmd-reference-message{color:var(--ink)}
+.about-route .about-company{color:var(--ink)}
+.about-route .about-kicker,.policy-heading>span,.career-title-band>span{color:#856B18}
+.about-route .about-copy-grid h3{color:var(--green)}
+.about-route .about-company .about-copy-grid p{color:var(--muted)}
+.contact-name-captions,.contact-page-form .contact-consent{color:var(--muted)}
+.contact-page-form .contact-consent input{accent-color:var(--emerald)}
+
+/* Card-specific enquiry popup. */
+.contact-modal-backdrop{z-index:150;background:rgba(0,0,0,.5)}
+.contact-modal{position:relative;width:min(400px,100%);max-height:calc(100dvh - 32px);overflow-y:auto;padding:30px;border-radius:7px;background:#fff;color:#333;box-shadow:0 18px 50px rgba(0,0,0,.22);font-family:var(--sans)}
+.contact-modal-close{position:absolute;top:12px;right:14px;width:32px;height:32px;border:0;background:transparent;color:#888;font-size:30px;font-weight:300;line-height:1;cursor:pointer}
+.contact-modal>h2{margin:0 35px 6px 0;color:#333;font:600 24px/1.25 var(--sans)}
+.contact-modal>p{margin:0 0 18px;color:#555;font:14px/1.55 var(--sans)}
+.contact-modal-project{position:relative;height:120px;margin:0 0 15px;overflow:hidden;border-radius:6px;background:#eee}
+.contact-modal-project:after{position:absolute;inset:35% 0 0;background:linear-gradient(transparent,rgba(0,0,0,.75));content:""}
+.contact-modal-project img{display:block;width:100%;height:100%;object-fit:cover}
+.contact-modal-project span{position:absolute;z-index:1;bottom:11px;left:12px;color:#fff;font:500 14px var(--sans)}
+.contact-modal form{display:grid;gap:12px;margin:0}
+.contact-modal form h3{margin:0 0 -3px;color:#444;font:500 18px/1.3 var(--sans)}
+.contact-modal form>input:not([type=hidden]),.contact-modal-phone input,.contact-modal-phone select{width:100%;height:40px;min-width:0;margin:0;padding:0 12px;border:1px solid #d2d2d2;border-radius:5px;background:#fff;color:#333;font:14px var(--sans)}
+.contact-modal-phone{display:grid;grid-template-columns:124px minmax(0,1fr);gap:0}
+.contact-modal-phone select{border-radius:5px 0 0 5px;padding:0 8px}
+.contact-modal-phone input{border-left:0;border-radius:0 5px 5px 0}
+.contact-modal-consent{display:flex;align-items:flex-start;gap:8px;color:#444;font:13px/1.5 var(--sans)}
+.contact-modal-consent input{flex:none;margin:2px 0 0;accent-color:#b02d83}
+.contact-modal-consent a{color:#d22d91;text-decoration:none}
+.contact-modal-consent a:hover{text-decoration:underline}
+.contact-modal form>button{height:40px;border:0;border-radius:5px;background:#a13d8a;color:#fff;font:15px var(--sans);cursor:pointer}
+.contact-modal form>button:hover{background:#8f2d79}
+.contact-modal-success{padding:16px;border-radius:5px;background:#f3edf2;color:#62305a;font:14px/1.5 var(--sans)}
+.contact-modal-sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+@media(max-width:480px){.contact-modal{padding:26px 20px}.contact-modal-project{height:105px}.contact-modal-phone{grid-template-columns:112px minmax(0,1fr)}}
+
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+@media(max-width:1050px){.latest-section .featured-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:520px){.latest-section .featured-grid{grid-template-columns:1fr;width:100%}.latest-section .featured-card:nth-child(n+2){display:block}.latest-section .featured-card .property-image{aspect-ratio:1.75}}
+
+/* Reference style homepage search hero and trending projects. */
+.home-search-hero{min-height:540px;display:flex;justify-content:center;align-items:flex-start;padding:68px 20px 54px;background-position:center 48%;background-size:cover;color:#fff;text-align:center}
+.home-search-content{width:min(1050px,100%)}
+.home-search-content h1{margin:0;color:#fff;font:500 clamp(25px,3vw,36px)/1.25 var(--sans);letter-spacing:0}
+.home-search-content h1 strong{font-weight:700}
+.home-search-content>p{margin:10px 0 42px;color:#fff;font:400 clamp(17px,2vw,24px)/1.3 var(--sans)}
+.home-search-hero .sh-search{width:min(700px,100%);max-width:none;height:60px;margin:0 auto;border:0;border-radius:7px;background:#fff;box-shadow:none}
+.home-search-hero .sh-search input{padding:0 24px;font:15px var(--sans)}
+.home-search-hero .sh-search-button{height:60px;min-width:168px;display:flex;justify-content:center;gap:10px;border:0;border-radius:7px;background:#d22d91;color:#fff;font:15px var(--sans)}
+.home-search-hero .sh-search-button:after{content:'Search'}
+.home-search-hero .sh-search-button:hover{background:#b8217c;color:#fff}
+.home-search-types{width:300px;height:43px;display:flex;margin:38px auto 56px;padding:2px;border:1px solid #fff;border-radius:24px}
+.home-search-types button{flex:1;border:0;border-radius:23px;background:transparent;color:#fff;font:16px var(--sans);cursor:pointer}
+.home-search-types button.active{background:#fff;color:#d22d91}
+.home-search-stats{display:grid;grid-template-columns:repeat(4,1fr);width:min(950px,100%);margin:0 auto}
+.home-search-stats>div{display:flex;flex-direction:column;gap:9px;padding:0 14px;border-right:1px solid #ffffffc4}
+.home-search-stats>div:last-child{border-right:0}
+.home-search-stats strong{font:500 23px var(--sans)}
+.home-search-stats span{font:600 12px var(--sans);letter-spacing:.04em}
+.latest-section{min-height:0;padding:48px 0 64px;background:#fff}
+.latest-section .section-heading{justify-content:center;margin:0 0 40px;text-align:center}
+.latest-section .section-heading h2.property-category{margin:0 0 8px;color:#151515;font:600 24px/1.3 var(--sans)}
+.latest-section .section-subtitle{margin:0;color:#737373;font:16px/1.4 var(--sans)}
+.latest-section .latest-tabs,.latest-section .latest-more,.latest-section>.wrap>.carousel-arrow{display:none}
+.latest-section .featured-grid{width:100%;grid-template-columns:none;grid-template-rows:1fr;grid-auto-flow:column;grid-auto-columns:calc((100% - 36px)/4);gap:12px;overflow-x:auto;padding:0 0 8px;scroll-snap-type:x mandatory}
+.latest-section .featured-card{scroll-snap-align:start}
+@media(max-width:1050px){.latest-section .featured-grid{grid-auto-columns:calc((100% - 12px)/2)}}
+@media(max-width:820px){.home-header .sh-inner{width:calc(100% - 28px);gap:15px}.home-header .sh-actions{gap:12px}.home-search-hero{min-height:500px;padding-top:64px}.home-search-stats{grid-template-columns:repeat(2,1fr);row-gap:25px}.home-search-stats>div:nth-child(2){border-right:0}}
+@media(max-width:520px){.header.site-header.home-header{height:auto}.home-header .sh-inner{flex-wrap:wrap;min-height:68px;padding:8px 0}.home-header .sh-logo{width:45px;height:45px}.home-header .sh-logo img{width:44px;height:44px}.home-header .sh-location{margin-right:auto}.home-header .sh-actions{margin-left:0}.home-header .sh-phone{display:none}.home-header .sh-link{display:none}.home-search-hero{min-height:490px;padding:52px 16px 42px;background-position:58% center}.home-search-content h1{font-size:25px}.home-search-content>p{margin:10px 0 30px;font-size:16px}.home-search-hero .sh-search{height:52px}.home-search-hero .sh-search input{padding:0 12px;font-size:13px}.home-search-hero .sh-search-button{min-width:92px;height:52px;font-size:0}.home-search-hero .sh-search-button:after{font-size:13px}.home-search-types{margin:28px auto 42px}.home-search-types button{font-size:14px}.home-search-stats{gap:22px 0}.home-search-stats>div{padding:0 8px}.home-search-stats strong{font-size:18px}.home-search-stats span{font-size:9px}.latest-section{padding:36px 0 45px}.latest-section .section-heading{margin-bottom:25px}.latest-section .featured-grid{grid-auto-columns:85%;width:100%;gap:14px}.latest-section .featured-card:nth-child(n+2){display:block}.latest-section .featured-card .property-image{aspect-ratio:1.75}}
+
+/* The forest-green brand header remains consistent on the homepage too. */
+.header.site-header.home-header{background:#0B3A27;color:#fff;border-bottom:1px solid #D0A850;box-shadow:none}
+.home-header .sh-logo{border-radius:50%;background:#F7F5F0;box-shadow:0 0 0 1px #D0A850}
+.home-header .sh-logo img{width:50px;height:50px}
+.home-header .sh-location-button,.home-header .sh-phone,.home-header .sh-link,.home-header .sh-menu{color:#fff}
+.home-header .sh-location-button svg,.home-header .sh-phone svg,.home-header .sh-phone b,.home-header .sh-link svg{color:#D0A850}
+.home-header .sh-phone{border-color:#D0A850}
+.home-header .sh-phone:hover{background:#0B3A27;border-color:#D0A850}
+.home-header .sh-menu:hover,.home-header .sh-link:hover{color:#D0A850}
+
+/* One shared visual language across every route. */
+:root{
+  --green:#0B3A27;
+  --green2:#0B3A27;
+  --emerald:#0B3A27;
+  --gold:#D0A850;
+  --gold2:#D0A850;
+  --cream:#FAFAFA;
+  --sage:#F7F5F0;
+  --surface:#FFFFFF;
+  --ink:#0B3A27;
+  --muted:#64766C;
+  --serif:var(--serif);
+  --sans:var(--sans);
+  font-family:var(--sans);
+  color:var(--ink);
+  background:var(--cream);
+}
+html,body,#root{background:var(--cream);color:var(--ink);font-family:var(--sans)}
+body,button,input,select,textarea{font-family:var(--sans)}
+main :is(h1,h2,h3,h4){font-family:var(--serif)!important}
+main :is(p,li,label,input,select,textarea,button,a,small){font-family:var(--sans)}
+main :is(p,li){color:var(--muted)}
+main a:not([class*="button"]):not([class*="btn"]){color:var(--green)}
+main a:not([class*="button"]):not([class*="btn"]):hover{color:#856B18}
+main :is(input,select,textarea){border-color:#d9e0da}
+main :is(input,select,textarea):focus-visible{outline:2px solid #D0A85080;outline-offset:1px;border-color:var(--gold)}
+
+/* Cream page canvas and calm alternating section bands. */
+main,.route-page,.listing-page,.detail-page,.project-detail-page,.recorded-media-page,
+.recorded-videos-page,.career-page,.about-route,.cmd-route,.sales-team-page,
+.operations-reference,.contact-page,.policy-page{background:var(--cream);color:var(--ink)}
+main :is(.intro,.team,.contact,.listing-content,.about-values,.about-stats,.about-company,
+  .policy-copy,.career-title-band,.media-karwaan-title,.route-banner){background:var(--sage);color:var(--ink)}
+main .properties{background:var(--cream)}
+main :is(.about-values p,.about-stats span,.about-values h3,.about-team-cta h2){color:var(--ink)}
+main .about-team-cta{background:var(--cream);border-top:1px solid #D0A85066}
+main :is(.operations-department,.sales-team-member,.cmd-reference-message){background:var(--cream);color:var(--ink)}
+main :is(.operations-profile-details,.cmd-reference-copy,.sales-member-copy){color:var(--muted)}
+main :is(.operations-profile-details h2,.operations-department h1,.sales-member-copy h2,
+  .cmd-reference-message>h1,.cmd-reference-message>h2){color:var(--green)}
+main :is(.about-copy-grid h3,.about-company>h2,.policy-copy h2,.policy-copy h3,
+  .career-title-band h1,.contact-details h2,.media-karwaan-title h2){color:var(--green)}
+
+/* Shared card, form, and control finish; panorama viewer surfaces stay dark and immersive. */
+main :is(.property-card,.listing-row,.team-note,.contact-form,.callback-card,.floor-plans article,
+  .pdp-overview-card,.pdp-content-section,.pdp-interest-card,.pdp-popup,.project-facts>div,
+  .pl-property-card,.pl-filter-panel,.pl-sort-bar,.pl-page-heading,.contact-page-form,
+  .career-form,.review-card,.featured-card,.contact-modal){
+  border:1px solid #D0A85066;
+  border-radius:14px;
+  background:var(--surface);
+  box-shadow:0 10px 30px -5px rgba(11,58,39,.07);
+}
+main :is(.property-card,.listing-row,.team-card,.team-route-card,.review-card,.pl-property-card){
+  transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease
+}
+main :is(.property-card,.listing-row,.team-card,.team-route-card,.review-card,.pl-property-card):hover{
+  transform:translateY(-4px);
+  border-color:#D0A850;
+  box-shadow:0 16px 34px -7px rgba(11,58,39,.16)
+}
+main :is(.gold-button,.outline-button,.listing-actions button,.pl-card-footer button,
+  .pl-details-link,.contact-form button,.contact-page-form button,.career-form button,
+  .contact-modal form>button){font-family:var(--sans);transition:transform .2s ease,background .2s ease,color .2s ease,box-shadow .2s ease}
+main :is(.gold-button,.listing-actions button:not(.secondary),.pl-apply-button,
+  .contact-form .gold-button,.contact-page-form>button,.career-form>button){
+  background:var(--emerald);border-color:var(--gold);color:#fff
+}
+main :is(.gold-button,.listing-actions button:not(.secondary),.pl-apply-button,
+  .contact-form .gold-button,.contact-page-form>button,.career-form>button):hover{
+  background:var(--gold-foil);color:var(--green);box-shadow:0 7px 18px #D0A85040;transform:translateY(-1px)
+}
+main :is(.outline-button,.listing-actions button.secondary){border-color:var(--green);color:var(--green);background:#fff}
+main :is(.outline-button,.listing-actions button.secondary):hover{background:var(--green);color:#fff}
+main :is(.property-tag,.pl-card-type){background:var(--green);color:#fff}
+main :is(.features span,.sale-chip,.type-chip,.pdp-builder,.pdp-rera){background:#F9F3E3;color:#806519;border-color:#D0A85066}
+main :is(.section-heading h2,.intro-copy h2,.contact h2,.listing-main h2,
+  .detail-section h2,.pdp-content-section h2,.property-info h3,.pl-card-body h2){color:var(--ink)}
+main :is(.property-meta,.details,.stats,.pl-card-meta){border-color:#E2E7E1}
+
+/* Homepage controls take the same forest-green and gold accents as inner pages. */
+.home-header>.sh-inner>.sh-search{display:flex;max-width:390px;background:#ffffff12;border-color:#D0A85080}
+.home-header .sh-search input{color:#fff}
+.home-header .sh-search input::placeholder{color:#e8eee9}
+.home-header .sh-search-button{border-left-color:#D0A85080;color:#D0A850}
+.home-header .sh-search-button:hover{color:#fff}
+.home-search-hero .sh-search-button{background:var(--emerald);border:1px solid var(--gold);color:#fff}
+.home-search-hero .sh-search-button:hover{background:var(--gold-foil);color:var(--green)}
+.home-search-types button.active{color:var(--green)}
+.latest-section .featured-price-row button{background:#F9F3E3;color:var(--green);border:1px solid #D0A85080}
+.latest-section .featured-price-row button:hover{background:var(--green);color:#fff}
+.latest-section .featured-rera{background:#F9F3E3;color:#806519}
+.hero .hero-project b{background:var(--green);color:#fff;border:1px solid var(--gold)}
+.hero .slide-arrow.prev,.hero .slide-arrow.next{color:var(--green);background:var(--gold-foil)}
+.hero .slide-arrow.prev:hover,.hero .slide-arrow.next:hover{color:var(--green);background:var(--gold-foil)}
+.looking-card{border-color:#D0A850;background:#0B3A27}
+.contact-call>span{color:#856B18}
+.contact-call h2{color:var(--green)}
+.contact-call p{color:var(--muted)}
+main .contact-call .outline-button{border-color:var(--green);color:var(--green)}
+.career-fields label,.contact-page-form>label{color:var(--ink)}
+main .contact-details>a,main .contact-details p{color:var(--muted)}
+.team-route-card{background:#0B3A27;color:#fff;border-color:#D0A850}
+.team-route-card h2,.team-route-card h4,.team-route-card span{color:#D0A850}
+.team-route-card ul,.team-route-card h3{color:#F1F4F1}
+.team-route-card a{color:#D0A850}
+.contact-page-content{width:min(1160px,calc(100% - 48px));gap:clamp(36px,7vw,96px);align-items:start}
+.contact-page-form{gap:18px;padding:clamp(22px,3vw,38px);border-radius:18px}
+.contact-page-form h1{margin:0 0 4px;color:var(--green);font:500 clamp(30px,3vw,40px)/1.15 var(--serif)}
+.contact-page-form>label.contact-field{display:grid;gap:8px;color:var(--ink);font:500 13px/1.4 var(--sans)}
+.contact-page-form .contact-field em{color:#856B18;font-style:normal}
+.contact-page-form .contact-name-fields{gap:12px}
+.contact-page-form input:not([type=checkbox]),.contact-page-form textarea{
+  min-height:46px;padding:12px 14px;border:1px solid #d9e0da;border-radius:8px;
+  background:#fff;color:var(--ink);font:400 14px/1.45 var(--sans);transition:border-color .2s,box-shadow .2s
+}
+.contact-page-form textarea{min-height:132px;resize:vertical}
+.contact-page-form input::placeholder,.contact-page-form textarea::placeholder{color:#89938b}
+.contact-page-form input:focus,.contact-page-form textarea:focus{outline:0;border-color:var(--gold);box-shadow:0 0 0 3px #D0A85026}
+.contact-page-form .contact-name-captions{margin-top:-2px;color:var(--muted);font-size:11px}
+.contact-page-form .contact-consent{display:grid;grid-template-columns:18px 1fr;gap:10px;align-items:start;color:var(--muted);font:400 12px/1.65 var(--sans)}
+.contact-page-form .contact-consent input{width:16px;height:16px;margin:2px 0 0;accent-color:var(--green)}
+.contact-page-form>button{display:flex;justify-content:center;align-items:center;gap:14px;align-self:flex-start;min-width:160px;min-height:46px;margin-top:0;padding:12px 20px;border:1px solid var(--gold);border-radius:7px;background:var(--green);color:#fff;font:600 13px var(--sans)}
+.contact-page-form>button:hover{background:var(--gold-foil);color:var(--green)}
+.contact-details{padding-top:28px;color:var(--muted)}
+.contact-details .contact-number{display:inline-flex;align-items:center;gap:8px;margin-bottom:18px;color:var(--green);font:500 clamp(21px,2.2vw,29px)/1.25 var(--sans)}
+.contact-details h2{margin:42px 0 18px;color:var(--green);font:500 27px/1.2 var(--serif)}
+main .contact-social a{background:var(--green);color:#D0A850}
+main .contact-social a:hover{background:var(--gold-foil);color:var(--green)}
+main .contact-details .contact-social a{color:#D0A850!important}
+main .contact-details .contact-social a:hover{color:var(--green)!important}
+.contact-social a svg{display:block;width:20px;height:20px;fill:currentColor}
+.contact-social a:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+@media(max-width:560px){.contact-page-content{width:calc(100% - 30px);gap:26px;padding:24px 0 50px}.contact-page-form{padding:22px 18px;gap:15px}.contact-page-form .contact-name-fields{grid-template-columns:1fr;gap:8px}.contact-page-form .contact-name-captions{display:none}.contact-details{padding-top:4px}.contact-details h2{margin-top:30px}}
+.contact-modal form>button{background:var(--emerald);border:1px solid var(--gold);color:#fff}
+.contact-modal form>button:hover{background:var(--gold-foil);color:var(--green)}
+.contact-modal-consent input{accent-color:var(--emerald)}
+.contact-modal-consent a{color:#806519}
+
+@media(max-width:820px){.home-header>.sh-inner>.sh-search{order:5;flex:1 1 100%;max-width:none}}
+@media(prefers-reduced-motion:reduce){main :is(.property-card,.listing-row,.team-card,.team-route-card,.review-card,.pl-property-card,.gold-button,.outline-button):hover{transform:none}}

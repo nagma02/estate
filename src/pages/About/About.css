@@ -1,0 +1,18 @@
+.about-company{padding:76px 0 86px;text-align:center}
+.about-kicker{font:400 15px var(--serif);letter-spacing:.04em;color:#D0A850}
+.about-copy-grid{display:grid;grid-template-columns:1fr 1fr;gap:62px;text-align:left;width:min(1080px,100%);margin:0 auto}
+.about-copy-grid>div{display:grid;gap:38px}
+.about-copy-grid h3{font:400 23px/1.2 var(--serif);color:#D0A850;margin:0 0 19px}
+.about-copy-grid p,.about-values p{font:400 15px/1.9 var(--sans);color:#e0e2d9;margin:0}
+.about-values{padding:68px 0;background:linear-gradient(110deg,#0B3A27,#062519);border-top:1px solid #D0A850;border-bottom:1px solid #D0A850}
+.about-values>.route-container{display:grid;grid-template-columns:1fr 1fr;gap:65px}
+.about-values article{padding:10px 5px}
+.about-values article>span{font-size:12px;letter-spacing:.15em;color:#D0A850}
+.about-values h3{font:400 32px var(--serif);color:#D0A850;margin:14px 0}
+.about-stats{display:grid;grid-template-columns:repeat(4,1fr);padding:54px 0;text-align:center}
+.about-stats article{display:flex;flex-direction:column;gap:8px;border-right:1px solid #D0A850}
+.about-stats article:last-child{border:0}
+.about-stats b{font:400 clamp(28px,3vw,42px) var(--serif);color:#D0A850}
+.about-stats span{font-size:11px;color:#e1e2d8;letter-spacing:.08em}
+.about-team-cta{padding:60px 0;background:#062519;text-align:center;border-top:1px solid #ffffff17}
+.about-team-cta h2{font:400 35px var(--serif);color:#f7f2e8;margin:13px auto 20px}

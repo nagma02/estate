@@ -1,0 +1,68 @@
+/* ==========================================================================
+   Experience layer — newer browser features on top of the motion layer.
+   Everything here is progressive: browsers without a feature keep the
+   regular site, and reduced-motion visitors get none of the movement.
+   - View Transitions: circle reveal between pages, card photo → detail hero morph
+   - Scroll-driven animations: reading progress bar, hero parallax
+   - @property: gold beam travelling round the hero search card
+   - Pointer polish (hooks/useExperience.js): spotlight, magnetic buttons, cursor ring
+   ========================================================================== */
+@property --beam-angle{syntax:'<angle>';inherits:false;initial-value:0deg}
+
+/* ───────────── Typography: balanced headings, no orphaned words ───────────── */
+#root :is(h1,h2,h3){text-wrap:balance}
+#root p{text-wrap:pretty}
+
+/* ───────────── Gold beam around the hero search card ───────────── */
+#root .ar-beam{position:absolute;inset:0;z-index:0;padding:1.5px;border-radius:inherit;pointer-events:none;background:conic-gradient(from var(--beam-angle),transparent 0 68%,rgba(208,168,80,.25) 76%,#EED487 84%,#D0A850 88%,transparent 93%);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;animation:ar-beam 7s linear infinite}
+@keyframes ar-beam{to{--beam-angle:360deg}}
+
+/* Partner logos fade in and out at the edges of the marquee. */
+#root .ar-assoc-marquee{-webkit-mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent)}
+
+/* ───────────── Scroll-driven: reading progress + hero parallax ───────────── */
+.ar-scroll-progress{display:none}
+@supports (animation-timeline: scroll()){
+  @media (prefers-reduced-motion:no-preference){
+    .ar-scroll-progress{position:fixed;top:0;left:0;right:0;z-index:95;display:block;height:3px;background:var(--gold-foil);box-shadow:0 0 12px rgba(208,168,80,.6);transform:scaleX(0);transform-origin:0 50%;pointer-events:none;animation:ar-progress linear both;animation-timeline:scroll(root block);view-transition-name:scroll-progress}
+    @keyframes ar-progress{to{transform:scaleX(1)}}
+    /* Photos drift slower than the page; the copy lifts and fades as the hero leaves. */
+    #root :is(.ar-hero-slides,.ar-pd-slider){animation:ar-parallax linear both;animation-timeline:scroll(root block);animation-range:0 100vh}
+    #root .ar-hero-inner{animation:ar-hero-drift linear both;animation-timeline:scroll(root block);animation-range:0 95vh}
+    @keyframes ar-parallax{to{translate:0 22vh}}
+    @keyframes ar-hero-drift{to{translate:0 -7vh;opacity:.3}}
+  }
+}
+
+/* ───────────── View Transitions between pages ───────────── */
+@supports (view-transition-name: none){
+  /* Shell pieces stay put while the page underneath changes. */
+  #root .ar-header{view-transition-name:site-header}
+  #root .ar-call-assist{view-transition-name:call-assist}
+  #root .ar-assist:not(.ar-call-assist){view-transition-name:chat-assist}
+  html.vt-morph .ar-pd-slider>img.active{view-transition-name:ar-morph}
+}
+::view-transition-old(root){animation:vt-page-out .5s cubic-bezier(.16,1,.3,1) both}
+::view-transition-new(root){animation:vt-page-in .95s cubic-bezier(.16,1,.3,1) both}
+@keyframes vt-page-out{to{opacity:0;transform:scale(.965);filter:blur(6px)}}
+@keyframes vt-page-in{from{clip-path:circle(0 at var(--vt-x,50%) var(--vt-y,50%))}to{clip-path:circle(150vmax at var(--vt-x,50%) var(--vt-y,50%))}}
+::view-transition-group(ar-morph){z-index:5;animation-duration:.9s;animation-timing-function:cubic-bezier(.16,1,.3,1)}
+::view-transition-old(ar-morph),::view-transition-new(ar-morph){height:100%;object-fit:cover;overflow:clip}
+::view-transition-old(ar-morph){animation:none;opacity:0}
+
+/* ───────────── Pointer polish (mouse users only) ───────────── */
+@media (hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference){
+  /* Gold spotlight that follows the cursor (position from --mx/--my). */
+  #root :is(.ar-service,.ar-card,.ar-tour-card,.ar-pd-section,.ar-pillar,.ar-home-benefit,.ar-detail-section,.ar-emi-calc){position:relative}
+  #root :is(.ar-service,.ar-card,.ar-tour-card,.ar-pd-section,.ar-pillar,.ar-home-benefit,.ar-detail-section,.ar-emi-calc):after{position:absolute;inset:0;z-index:3;border-radius:inherit;background:radial-gradient(380px circle at var(--mx,50%) var(--my,50%),rgba(208,168,80,.15),transparent 62%);content:"";opacity:0;pointer-events:none;transition:opacity .45s}
+  #root :is(.ar-service,.ar-card,.ar-tour-card,.ar-pd-section,.ar-pillar,.ar-home-benefit,.ar-detail-section,.ar-emi-calc):hover:after{opacity:1}
+
+  /* Trailing gold ring; it grows over anything clickable and tightens on press. */
+  .ar-cursor{position:fixed;top:0;left:0;z-index:500;width:34px;height:34px;margin:-17px 0 0 -17px;border:1.5px solid rgba(208,168,80,.85);border-radius:50%;opacity:0;pointer-events:none;will-change:transform;transition:opacity .3s,width .35s cubic-bezier(.16,1,.3,1),height .35s cubic-bezier(.16,1,.3,1),margin .35s cubic-bezier(.16,1,.3,1),background-color .3s,border-color .3s}
+  .ar-cursor.is-visible{opacity:1}
+  .ar-cursor.is-active{width:56px;height:56px;margin:-28px 0 0 -28px;border-color:#D0A850;background:rgba(208,168,80,.12)}
+  .ar-cursor.is-pressed{width:24px;height:24px;margin:-12px 0 0 -12px;background:rgba(208,168,80,.3)}
+}
+@media (prefers-reduced-motion:reduce){
+  #root .ar-beam{animation:none;opacity:.5}
+}

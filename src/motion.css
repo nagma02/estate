@@ -1,0 +1,82 @@
+/* ==========================================================================
+   Motion layer — cinematic editorial micro-animations for every page.
+   Loaded last so it only retunes timing/transform; layout and colour stay
+   with design.css and the legacy layers. Reveal states come from
+   hooks/useScrollReveal.js (data-reveal on blocks, data-img-reveal on photos).
+   ========================================================================== */
+:root{--expo:cubic-bezier(.16,1,.3,1);--lift:-10px;--lift-shadow:0 30px 60px -18px rgba(11,58,39,.32),0 0 0 1px rgba(208,168,80,.35)}
+
+/* ───────────── Page transition: fade + scale .98 → 1 ───────────── */
+.page-transition{animation:motion-page-in .7s var(--expo) backwards}
+@keyframes motion-page-in{from{opacity:0;transform:scale(.98)}to{opacity:1;transform:none}}
+
+/* ───────────── Typography mask reveal ─────────────
+   The heading slides up from translateY(100%) while its bottom clip edge
+   rises in step, so the text appears to emerge from behind its own line. */
+@keyframes motion-mask-up{
+  from{transform:translateY(100%);clip-path:inset(-.2em -.1em 100% -.1em)}
+  to{transform:none;clip-path:inset(-.2em -.1em -.25em -.1em)}
+}
+/* Pending headings stay unclipped (only transparent) so IntersectionObserver can still see them;
+   the mask itself runs as an animation once the heading is revealed. */
+html #root :is(h1,h2)[data-reveal="pending"]{opacity:0;transform:none}
+html #root :is(h1,h2)[data-reveal="in"]{opacity:1;transform:none;transition:none;animation:motion-mask-up 1.1s var(--expo) var(--reveal-delay,0s) both}
+/* Headings that already play an on-load entrance get the mask instead of a plain rise. */
+#root :is(.hero-content.entering>h1,.ar-hero-copy>h1,.ar-hk-hero-copy>h1,.ar-ph-copy>h1,.ar-page-head>.ar-wrap>h1){animation:motion-mask-up 1.1s var(--expo) both}
+#root .hero-content.entering>h1{animation-delay:.2s}
+#root .ar-page-head>.ar-wrap>h1{animation-delay:.08s}
+
+/* ───────────── Image scale-down reveal (1.15 → 1 over 1.2s) ─────────────
+   #root#root outranks card hover-zoom rules while the reveal runs. */
+html #root#root img[data-img-reveal="pending"]{transform:scale(1.15)}
+html #root#root img[data-img-reveal="in"]{transform:scale(1);transition:transform 1.2s var(--expo) var(--reveal-delay,0s)}
+
+/* ───────────── Hover: parallax zoom inside card frames ───────────── */
+#root :is(.ar-card-media,.ar-gallery button,.vt-thumb,.ar-profile-media,.media-moment,.property-card,.deal-card,.looking-card,.listing-photo,.latest-links button) img{transition:transform .9s var(--expo)}
+#root .ar-profile-media{overflow:hidden}
+
+@media (hover:hover) and (prefers-reduced-motion:no-preference){
+  /* Surface levitation: cards, tiles and panels */
+  html #root :is(.ar-card,.ar-category-card,.ar-tour-card,.ar-profile,.ar-home-benefit,.ar-plan-card,.ar-google-review-card,.media-moment,.property-card,.deal-card,.looking-card,.listing-row,.virtual-tour-card,.team-card,.review-card,.team-route-card,.pl-property-card){transition:transform .5s var(--expo),box-shadow .5s var(--expo),border-color .4s,background .4s,color .4s}
+  html #root :is(.ar-card,.ar-category-card,.ar-tour-card,.ar-profile,.ar-home-benefit,.ar-plan-card,.ar-google-review-card,.media-moment,.property-card,.deal-card,.looking-card,.listing-row,.virtual-tour-card,.team-card,.review-card,.team-route-card,.pl-property-card):hover{transform:translateY(var(--lift));box-shadow:var(--lift-shadow)}
+  html #root .ar-leadership .ar-profile:hover{transform:translateY(var(--lift)) scale(1.01)}
+  /* Pillars keep their staggered offset and lift from it. */
+  html #root .ar-pillar:hover{transform:translateY(var(--lift));box-shadow:var(--lift-shadow)}
+  html #root .ar-pillar:nth-child(2n+1):hover{transform:translateY(14px)}
+
+  /* Buttons, pills and filter chips: a shorter lift so the target never slides out from under the cursor. */
+  html #root :is(.ar-btn,.ar-pill-list button,.ar-hero-localities button,.ar-city-grid button,.ar-amenities span,.gold-button,.outline-button,.listing-actions button,.ar-google-view-all){transition:transform .45s var(--expo),box-shadow .45s var(--expo),background-color .25s,background-size .45s var(--expo),border-color .25s,color .25s}
+  html #root :is(.ar-btn,.ar-pill-list button,.ar-hero-localities button,.ar-city-grid button,.ar-amenities span,.gold-button,.outline-button,.listing-actions button,.ar-google-view-all):hover{transform:translateY(-4px);box-shadow:0 14px 28px -12px rgba(11,58,39,.45)}
+
+  /* Photo zoom on card hover */
+  html #root :is(.ar-card:hover .ar-card-media,.ar-gallery button:hover,.vt-thumb:hover,.ar-profile:hover .ar-profile-media,.media-moment:hover,.property-card:hover,.deal-card:hover,.looking-card:hover,.listing-row:hover .listing-photo,.latest-links button:hover) img{transform:scale(1.06)}
+}
+
+/* ───────────── Centre-expanding gold underline ─────────────
+   Drawn as a background bar so it never collides with existing ::after effects. */
+#root :is(.ar-icon-link,.ar-tabs button,.ar-drawer-group>li>a,.ar-drawer-toggle,.ar-btn:not(.ar-btn-gold)){background-image:linear-gradient(var(--gold),var(--gold));background-repeat:no-repeat;background-position:50% calc(100% - 5px);background-size:0% 2px;transition:background-size .45s var(--expo),background-color .25s,color .25s,transform .45s var(--expo),box-shadow .45s var(--expo)}
+#root :is(.ar-icon-link,.ar-tabs button,.ar-drawer-group>li>a,.ar-drawer-toggle,.ar-btn:not(.ar-btn-gold)):is(:hover,:focus-visible,.active,[aria-current="page"]){background-size:56% 2px}
+#root .ar-section-tabs button:after{transform-origin:center;transition:transform .45s var(--expo)}
+
+/* ───────────── Floating glass panels (4s levitation) ─────────────
+   Uses the `translate` property so it stacks with any transform already on the element. */
+@keyframes motion-float{0%,100%{translate:0 0}50%{translate:0 -8px}}
+@media (min-width:851px){
+  #root :is(.ar-enquiry,.ar-search-lg,.ar-leadership .ar-team-list){animation:motion-float 4s ease-in-out infinite}
+  #root .ar-search-lg:focus-within{animation-play-state:paused}
+}
+
+/* ───────────── Modals & drawer ───────────── */
+@keyframes motion-backdrop-in{from{opacity:0;backdrop-filter:blur(0)}to{opacity:1;backdrop-filter:blur(6px)}}
+#root .ar-modal-backdrop{animation:motion-backdrop-in .4s var(--expo) both}
+#root .ar-modal{animation:ar-modal-zoom .5s var(--expo) both}
+#root .ar-drawer{scale:.95;transform-origin:right center;transition:transform .6s var(--expo),scale .6s var(--expo),visibility 0s linear .6s}
+#root .ar-drawer-root.open .ar-drawer{scale:1;transition:transform .6s var(--expo),scale .6s var(--expo)}
+#root .ar-drawer-backdrop{backdrop-filter:blur(0);transition:opacity .5s var(--expo),backdrop-filter .5s var(--expo)}
+#root .ar-drawer-root.open .ar-drawer-backdrop{backdrop-filter:blur(6px)}
+
+@media (prefers-reduced-motion:reduce){
+  .page-transition,#root :is(.hero-content.entering>h1,.ar-hero-copy>h1,.ar-page-head>.ar-wrap>h1,.ar-enquiry,.ar-search-lg,.ar-leadership .ar-team-list,.ar-modal-backdrop,.ar-modal){animation:none!important}
+  html #root [data-img-reveal],html #root :is(h1,h2)[data-reveal]{opacity:1!important;transform:none!important;clip-path:none!important;transition:none!important;animation:none!important}
+  #root .ar-drawer{scale:1}
+}
