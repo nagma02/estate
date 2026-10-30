@@ -4,7 +4,7 @@ import CategoryChooser from './sections/CategoryChooser'
 import TrustGuidance from './sections/TrustGuidance'
 import ServiceCards from './sections/ServiceCards'
 import FeaturedHomes from './sections/FeaturedHomes'
-import LeadershipVision from './sections/LeadershipVision'
+import EmiCalculator from './sections/EmiCalculator'
 import Localities from './sections/Localities'
 import Testimonials from './sections/Testimonials'
 import Associations from './sections/Associations'
@@ -19,7 +19,7 @@ export default function Home({ favorites, onToggleFavorite, onEnquiry, onNavigat
     <TrustGuidance/>
     <ServiceCards onNavigate={onNavigate}/>
     <FeaturedHomes favorites={favorites} onToggleFavorite={onToggleFavorite} onEnquiry={onEnquiry} onNavigate={onNavigate}/>
-    <LeadershipVision onNavigate={onNavigate}/>
+    <EmiCalculator onEnquiry={onEnquiry}/>
     <Localities onNavigate={onNavigate}/>
     <Testimonials/>
     <Associations/>

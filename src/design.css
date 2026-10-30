@@ -1014,6 +1014,7 @@ html #root [data-reveal="in"]{opacity:1;transform:none;transition:opacity .8s va
 #root .ar-section-head h2{color:#1A2421}
 #root .home-page .ar-section-head:not(.ar-section-head-split){position:relative;padding-bottom:16px}
 #root .home-page .ar-section-head:not(.ar-section-head-split):after{content:"";display:block;width:56px;height:3px;margin:18px 0 0;border-radius:99px;background:linear-gradient(90deg,#D0A850,#C8A96C)}
+#root .home-page .ar-section-head.ar-hk-center:not(.ar-section-head-split):after{margin-inline:auto}
 #root .home-page .ar-section-head:not(.ar-section-head-split):has(+ *){margin-bottom:38px}
 
 #root .ar-card{border-color:rgba(11,58,39,.1);border-radius:26px;box-shadow:0 10px 30px -5px rgba(11,58,39,.06);transition:transform .5s cubic-bezier(.2,.75,.25,1),box-shadow .5s,border-color .35s}
@@ -1353,7 +1354,7 @@ html #root [data-reveal="in"]{opacity:1;transform:none;transition:opacity .8s va
 /* ───────────── Unified page width ─────────────
    Every page container lines up with the header (1600px max) and shares one side gutter.
    Reading columns (policy text, team cards) keep their own narrower max-width inside. */
-:root{--page-w:1600px;--page-gutter:32px}
+:root{--page-w:1840px;--page-gutter:32px}
 @media(max-width:760px){:root{--page-gutter:16px}}
 html #root :is(.ar-wrap,.ar-hero-inner,.ar-footer-inner,.ar-header-inner,.ar-detail>.ar-wrap,.home-page .ar-wrap,.ar-leadership,.route-container,.pdp-container,.pl-container,.commercial-container,.media-masonry,.recorded-media-page .media-masonry,.walkthrough-layout,.career-content,.contact-page-content,.operations-reference .operations-hero,.operations-reference .operations-department,.sales-team-hero,.sales-team-list,.cmd-reference-hero,.cmd-reference-message,.about-route .about-hero>div,.about-route .about-stats,.about-route .about-values>.route-container,.policy-layout,.policy-heading,.home-page>.ar-google-reviews-section,.detail-page-rishita .detail-gallery,.detail-page-rishita .detail-body,.site-footer-inner,.sh-inner){width:min(var(--page-w),calc(100% - var(--page-gutter) * 2));max-width:none}
 html #root .ar-leadership .ar-team-list{width:100%;max-width:1040px}
@@ -1844,8 +1845,8 @@ html #root .about-route .about-company{padding-inline:0}
   #root .ar-hk-stat{flex-direction:column;align-items:flex-start;padding:18px 16px}
 }
 
-/* Home page runs wider than the shared page width (header and footer keep theirs). */
-:root{--home-w:1840px}
+/* One content width and gutter for every page, header and footer (see --page-w / --page-gutter). */
+:root{--home-w:var(--page-w)}
 html #root :is(.ar-page.home-page .ar-wrap,.ar-page.home-page>.ar-google-reviews-section){width:min(var(--home-w),calc(100% - var(--page-gutter) * 2))}
 
 /* ───────────── Inner page hero (PageHero) — full-bleed photo, same language as the home hero ───────────── */
@@ -1879,4 +1880,246 @@ html #root :is(.ar-page.home-page .ar-wrap,.ar-page.home-page>.ar-google-reviews
   #root .ar-ph{min-height:420px}
   #root .ar-ph-copy{padding-block:48px}
   #root .ar-ph-extra :is(a,button),#root .ar-ph-extra>span{height:36px;padding:0 13px;font-size:12px}
+}
+
+/* ───────────── Mobile & tablet polish ───────────── */
+/* Sticky WhatsApp / Enquire bar — phones only, replaces the floating call and chat buttons. */
+#root .ar-mobile-cta{display:none}
+@media (max-width:767px){
+  #root .ar-mobile-cta{position:fixed;inset:auto 0 0;z-index:88;display:flex;gap:12px;padding:12px 12px calc(12px + env(safe-area-inset-bottom));border-top:1px solid rgba(11,58,39,.1);background:rgba(255,255,255,.97);box-shadow:0 -14px 30px -18px rgba(6,37,25,.45);view-transition-name:mobile-cta}
+  #root .ar-mobile-cta>*{display:inline-flex;flex:1;align-items:center;justify-content:center;gap:8px;min-height:46px;padding:0 16px;border:0;border-radius:999px;font:700 14px var(--sans);text-align:center;text-decoration:none;cursor:pointer}
+  #root .ar-mobile-cta-whatsapp{background:#059669;color:#fff}
+  #root .ar-mobile-cta-enquire{background:var(--emerald);color:var(--gold)}
+  #root .ar-mobile-cta-enquire svg{color:var(--gold)}
+  #root .ar-assist{display:none}
+  #root{padding-bottom:72px}
+  #root .ar-mobile-dock{bottom:84px}
+  /* The property page keeps its own enquiry bar there. */
+  #root:has(.ar-pd-leadbar) .ar-mobile-cta{display:none}
+
+  /* Home hero: centred, stacked, nothing clipped. */
+  #root .ar-hk-hero-copy{display:flex;flex-direction:column;align-items:center;gap:0;padding:44px 0 40px;text-align:center}
+  #root .ar-hk-hero-copy h1{margin:16px 0 12px;font-size:clamp(28px,7.6vw,34px);line-height:1.2}
+  #root .ar-hk-hero-copy>p{font-size:15px}
+  #root .ar-hk-search{width:100%;justify-items:center;margin-top:24px}
+  #root .ar-hk-search-types,#root .ar-hero-localities{justify-content:center}
+  #root .ar-hk-search-bar{width:100%}
+  /* Inner page heroes follow the same centred stack. */
+  #root .ar-ph-copy{justify-items:center;text-align:center}
+  #root .ar-ph-copy>h1{font-size:clamp(28px,7.6vw,36px);line-height:1.2}
+  #root .ar-ph .ar-breadcrumb,#root .ar-ph-extra{justify-content:center}
+  #root .ar-ph-extra>*{justify-content:center}
+
+  /* Property-type cards swipe sideways. */
+  #root .ar-hk-category-grid{display:flex;gap:12px;margin-inline:calc(var(--page-gutter) * -1);padding:4px var(--page-gutter) 12px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-inline:var(--page-gutter);scrollbar-width:none}
+  #root .ar-hk-category-grid::-webkit-scrollbar{display:none}
+  #root .ar-hk-category{flex:0 0 76%;scroll-snap-align:start}
+  #root .ar-hk-category-label small{display:block}
+  #root .ar-hk-stat{align-items:center;text-align:center}
+
+  /* 44px touch targets */
+  #root :is(.ar-hk-search-types button,.ar-hero-localities button,.ar-type-switch button,.ar-pill-list button,.ar-topic button,.ar-pd-pills button,.ar-ph-extra :is(a,button),.ar-ph-extra>span,.ar-btn,.about-team-cta button){min-height:44px;height:auto}
+  #root .ar-hero-localities button{padding-inline:14px}
+  #root :is(.ar-hk-home-heart,.ar-card-heart,.ar-google-arrow,.ar-pd-slider-controls button,.ar-filter-drawer-head button,.ar-social a){width:44px;min-width:44px;height:44px}
+  #root :is(.ar-emi-input,.ar-emi-unit,.ar-toolbar-search){min-height:44px;height:44px}
+  #root .ar-filter-mobile-sort select{min-height:44px}
+  #root :is(.ar-office-phone,.career-phone,.ar-contact li a,.ar-google-summary a){display:inline-flex;align-items:center;justify-content:center;min-height:44px}
+  #root :is(.ar-hk-hero-copy,.ar-ph-copy)>.ar-eyebrow{height:auto;padding-block:7px;font-size:10px;letter-spacing:.14em;text-align:center}
+  /* Text-style buttons grow their tap area without shifting the layout. */
+  #root :is(.ar-hk-home-title,.ar-pd-link,.ar-filter-title button){min-height:44px;margin-block:-10px;padding-block:10px}
+  #root .ar-consent,#root label:has(>input[type=checkbox]){min-height:44px;align-items:center}
+}
+
+/* ───────────── Phone layout polish — desktop is untouched ───────────── */
+@media (max-width:767px){
+  /* Header: logo · city · actions on one row, search on the second (was three rows). */
+  #root .ar-header-inner{flex-wrap:wrap;gap:8px;padding:8px 0 10px;min-height:0}
+  #root .ar-header .ar-logo-mark{width:60px;height:46px}
+  #root .ar-city-button{height:40px;padding:0 12px;font-size:13px}
+  #root .ar-header-actions{gap:4px;margin-left:auto}
+  #root .ar-header-actions>*{flex:none}
+  #root .ar-header>.ar-header-inner>.ar-search{order:5;flex:1 1 100%;max-width:none;height:44px}
+
+  /* Tighter vertical rhythm between sections. */
+  #root .home-page>.ar-section,#root .ar-hk>.ar-section{padding-block:40px}
+  #root .ar-section-head{margin-bottom:22px}
+  #root .ar-section-head h2{font-size:clamp(28px,7.4vw,34px);line-height:1.15}
+  #root .ar-hk-collage{min-height:320px;margin-top:8px}
+  #root .ar-hk-collage-note{font-size:16px}
+  #root .ar-hk-stats{gap:10px}
+  #root .ar-hk-stat b{font-size:24px}
+
+  /* How we help: compact 2 × 2. */
+  #root .ar-hk-services{grid-template-columns:1fr 1fr;gap:10px}
+  #root .ar-hk-service{padding:18px 14px;gap:4px}
+  #root .ar-hk-service-icon{width:42px;height:42px;margin-bottom:8px}
+  #root .ar-hk-service b{font-size:14px}
+  #root .ar-hk-service small{font-size:12.5px}
+
+  /* Featured homes and localities swipe sideways like the category cards. */
+  #root :is(.ar-hk-homes,.ar-locality-grid){display:flex;gap:12px;margin-inline:calc(var(--page-gutter) * -1);padding:4px var(--page-gutter) 14px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-inline:var(--page-gutter);scrollbar-width:none}
+  #root :is(.ar-hk-homes,.ar-locality-grid)::-webkit-scrollbar{display:none}
+  #root .ar-hk-home{flex:0 0 82%;scroll-snap-align:start}
+  #root .ar-locality-grid>li{flex:0 0 72%;scroll-snap-align:start}
+
+  #root .ar-pd-hero h1{font-size:clamp(30px,8.2vw,38px);line-height:1.1}
+  /* Footer: link columns side by side, brand and contact full width. */
+  #root .ar-footer-grid{grid-template-columns:1fr 1fr;gap:26px 18px}
+  #root .ar-footer-grid>:first-child,#root .ar-footer-grid>.ar-footer-contact{grid-column:1/-1}
+}
+@media (max-width:380px){
+  #root .ar-header .ar-logo-mark{width:50px;height:40px}
+  #root .ar-city-button{gap:5px;padding:0 10px;font-size:12.5px}
+  #root .ar-header-actions{gap:2px}
+}
+@media (max-width:340px){
+  #root .ar-header .ar-logo-mark{width:42px;height:34px}
+  #root .ar-city-button{padding:0 9px}
+  #root .ar-city-button>svg:last-of-type{display:none}
+  #root .ar-header-inner{column-gap:6px}
+}
+
+/* Odd blocks that sized themselves: snap them to the shared page width and gutter too. */
+html #root :is(.about-team-cta>.route-container,.media-karwaan-title>h2,.ar-pd-leadbar-inner){width:min(var(--page-w),calc(100% - var(--page-gutter) * 2));max-width:none;margin-inline:auto}
+html #root :is(.about-route .about-team-cta,.recorded-media-page .media-karwaan-title){padding-inline:0}
+@media (max-width:767px){#root .ar-mobile-cta{padding-inline:var(--page-gutter)}}
+
+/* ───────────── Phone header: logo · city on the left, matched round icon buttons on the right, search below ───────────── */
+@media (max-width:767px){
+  #root .ar-header-inner{display:flex;flex-wrap:wrap;align-items:center;gap:10px 8px;padding:10px 0 12px;min-height:0}
+  #root .ar-header .ar-logo{flex:none}
+  #root .ar-header .ar-logo-mark{width:54px;height:42px}
+  #root .ar-header .ar-city-button{height:34px;gap:5px;padding:0 11px 0 9px;border-color:rgba(208,168,80,.35);background:rgba(255,255,255,.06);font-size:13px}
+  #root .ar-header .ar-city-menu{width:min(300px,calc(100vw - 24px))}
+  #root .ar-header .ar-header-actions{gap:6px;margin-left:auto}
+  /* Heart, phone and menu: bare line icons (no rings or fills), with an invisible tap area. */
+  #root .ar-header :is(.ar-favourites-link,.ar-tollfree,.ar-menu-button){display:inline-grid;place-items:center;width:36px;height:36px;margin:0;padding:0;border:0;border-radius:50%;background:none;box-shadow:none;color:#fff;transform:none}
+  #root .ar-header :is(.ar-favourites-link,.ar-tollfree,.ar-menu-button):active{background:rgba(255,255,255,.1)}
+  #root .ar-header .ar-favourites-link .ar-favourites-heart{display:inline-flex;color:#fff}
+  #root .ar-header .ar-favourites-heart>b{top:-6px;right:-8px;border-color:var(--emerald)}
+  #root .ar-header .ar-tollfree-icon{width:auto;height:auto;background:none;color:#fff}
+  #root .ar-header :is(.ar-favourites-link,.ar-tollfree) svg{width:21px;height:21px;color:#fff}
+  #root .ar-header .ar-menu-button svg{width:24px;height:24px}
+  #root .ar-header>.ar-header-inner>.ar-search{order:5;flex:1 1 100%;max-width:none;height:44px;padding-left:14px;border-color:rgba(255,255,255,.12);background:rgba(255,255,255,.08)}
+  #root .ar-header .ar-search input{font-size:13.5px}
+  #root .ar-header .ar-search-submit{width:34px;height:34px}
+}
+@media (max-width:380px){
+  #root .ar-header .ar-logo-mark{width:46px;height:36px}
+  #root .ar-header .ar-city-button{padding:0 10px 0 8px;font-size:12.5px}
+  #root .ar-header .ar-header-actions{gap:4px}
+  #root .ar-header :is(.ar-favourites-link,.ar-tollfree,.ar-menu-button){width:34px;height:34px}
+}
+@media (max-width:340px){
+  #root .ar-header .ar-city-button>svg:last-of-type{display:none}
+}
+
+/* ───────────── Phone footer: compact brand, link columns in a panel, contact as tap cards ───────────── */
+@media (max-width:767px){
+  /* Let the emerald run under the sticky WhatsApp / Enquire bar instead of a white strip. */
+  #root:has(>.ar-footer){padding-bottom:0}
+  #root .ar-footer{padding-bottom:calc(72px + env(safe-area-inset-bottom))}
+  #root .ar-footer-cta{padding:30px 0 22px;text-align:center;align-items:center}
+  #root .ar-footer-cta h2{font-size:clamp(28px,8vw,34px)}
+  #root .ar-footer-grid{grid-template-columns:1fr 1fr;gap:14px 12px;padding:22px 0}
+  #root .ar-footer-grid>.ar-footer-brand,#root .ar-footer-grid>.ar-footer-contact{grid-column:1/-1}
+  #root .ar-footer-brand{display:flex;flex-direction:column;align-items:center;text-align:center}
+  #root .ar-footer-brand .ar-logo-mark{width:72px;height:56px}
+  #root .ar-footer-brand p{max-width:330px;margin-top:10px;font-size:13.5px;line-height:1.65}
+  #root .ar-footer-grid>nav{gap:0;padding:14px 16px 10px;border:1px solid rgba(208,168,80,.2);border-radius:18px;background:rgba(255,255,255,.04)}
+  #root .ar-footer-grid h3{margin:0 0 6px;font-size:10px}
+  #root .ar-footer-grid nav a{width:100%;min-height:36px;padding:0;font-size:14px}
+  #root .ar-footer-contact{grid-template-columns:1fr 1fr;gap:10px;margin-top:6px}
+  #root .ar-footer-contact h3{grid-column:1/-1;margin:0}
+  #root .ar-footer-contact :is(a,p){align-items:center;gap:10px;min-height:0;padding:12px;border:1px solid rgba(208,168,80,.2);border-radius:16px;background:rgba(255,255,255,.04);font-size:13.5px;line-height:1.35;overflow-wrap:anywhere}
+  #root .ar-footer-contact :is(a[href^="mailto"],p){grid-column:1/-1}
+  #root .ar-footer-contact svg{box-sizing:content-box;width:15px;height:15px;margin:0;padding:9px;border-radius:50%;background:rgba(208,168,80,.14)}
+  #root .ar-footer-contact small{margin-bottom:3px;font-size:9.5px}
+  #root .ar-footer-contact p{font-size:13px;line-height:1.5}
+  #root .ar-footer-bottom{gap:12px;padding:18px 0 20px}
+  #root .ar-footer-bottom>span{font-size:12px}
+  #root .ar-footer-legal nav{gap:8px}
+  #root .ar-footer-bottom nav a{min-height:34px;padding-inline:14px;font-size:12px}
+  #root .ar-footer-legal .ar-footer-powered{font-size:12.5px}
+  #root .ar-footer-legal .ar-footer-partner-logo{width:76px;height:24px}
+}
+@media (max-width:400px){
+  /* Two phone cards side by side: icon above the number so it never wraps. */
+  #root .ar-footer-contact a[href^="tel"]{flex-direction:column;align-items:flex-start;gap:8px}
+  #root .ar-footer-contact a[href^="tel"] span{white-space:nowrap}
+}
+@media (max-width:330px){
+  #root .ar-footer-contact{grid-template-columns:1fr}
+}
+
+/* ───────────── Home: home-loan EMI calculator ───────────── */
+#root .ar-emi{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);overflow:hidden;max-width:1080px;margin:0 auto;border:1px solid var(--line);border-radius:28px;background:#fff;box-shadow:var(--shadow-2)}
+#root .ar-emi-inputs{display:grid;gap:26px;padding:clamp(24px,3.5vw,44px)}
+#root .ar-emi-field{display:grid;gap:12px}
+#root .ar-emi-field>span{display:flex;align-items:baseline;justify-content:space-between;gap:12px}
+#root .ar-emi-field b{color:var(--ink-2);font:600 14px var(--sans)}
+#root .ar-emi-field output{padding:6px 12px;border-radius:10px;background:var(--mint);color:var(--emerald);font:700 15px var(--sans);white-space:nowrap}
+#root .ar-emi-field input{--fill:50%;width:100%;height:6px;margin:6px 0;border-radius:99px;background:linear-gradient(90deg,var(--gold) var(--fill),var(--sand-2) var(--fill));appearance:none;-webkit-appearance:none;cursor:pointer}
+#root .ar-emi-field input::-webkit-slider-thumb{width:22px;height:22px;border:4px solid #fff;border-radius:50%;background:var(--emerald);box-shadow:0 0 0 1px var(--gold),0 4px 10px rgba(11,58,39,.3);-webkit-appearance:none}
+#root .ar-emi-field input::-moz-range-thumb{width:14px;height:14px;border:4px solid #fff;border-radius:50%;background:var(--emerald);box-shadow:0 0 0 1px var(--gold),0 4px 10px rgba(11,58,39,.3)}
+#root .ar-emi-field input:focus-visible{outline:2px solid var(--gold);outline-offset:6px}
+#root .ar-emi-field small{display:flex;justify-content:space-between;color:var(--muted);font-size:11.5px}
+#root .ar-emi-field small i{font-style:normal}
+#root .ar-emi-result{display:flex;flex-direction:column;padding:clamp(24px,3.5vw,44px);background:radial-gradient(120% 90% at 100% 0%,var(--emerald-2),var(--emerald) 60%,var(--emerald-deep));color:#fff}
+#root .ar-emi-result>small{color:var(--gold);font:700 11px var(--sans);letter-spacing:.18em;text-transform:uppercase}
+#root .ar-emi-result strong{margin:10px 0 22px;font:400 clamp(38px,4.4vw,54px)/1 var(--serif);letter-spacing:-.01em}
+#root .ar-emi-bar{height:10px;overflow:hidden;border-radius:99px;background:rgba(255,255,255,.18)}
+#root .ar-emi-bar span{display:block;height:100%;border-radius:99px;background:var(--gold-foil);transition:width .3s var(--ease)}
+#root .ar-emi-result dl{display:grid;gap:12px;margin:22px 0 26px}
+#root .ar-emi-result dl>div{display:flex;justify-content:space-between;gap:12px;font-size:14px}
+#root .ar-emi-result dl>div:last-child{padding-top:12px;border-top:1px solid rgba(208,168,80,.3);font-weight:700}
+#root .ar-emi-result dt{display:flex;align-items:center;gap:8px;color:rgba(255,255,255,.72)}
+#root .ar-emi-result dt i{width:10px;height:10px;border-radius:50%}
+#root .ar-emi-result dt i.principal{background:var(--gold)}
+#root .ar-emi-result dt i.interest{background:rgba(255,255,255,.3)}
+#root .ar-emi-result dd{margin:0;font-weight:700;white-space:nowrap}
+#root .ar-emi-result .ar-btn{margin-top:auto}
+#root .ar-emi-result p{margin:12px 0 0;color:rgba(255,255,255,.55);font-size:11.5px;text-align:center}
+@media (max-width:860px){#root .ar-emi{grid-template-columns:1fr}}
+@media (max-width:767px){
+  #root .ar-emi{border-radius:22px}
+  #root .ar-emi-inputs{gap:22px;padding:22px 18px}
+  #root .ar-emi-field b{font-size:13px}
+  #root .ar-emi-field output{font-size:14px}
+  #root .ar-emi-result{padding:24px 18px}
+  #root .ar-emi-result dl>div{font-size:13px}
+}
+
+/* Featured homes on phones: a strip that glides on its own (see useAutoScroll); copies only exist for the loop. */
+#root .ar-hk-home.is-clone{display:none}
+@media (max-width:767px){
+  #root .ar-hk-home.is-clone{display:flex}
+  #root .ar-hk-home{flex:0 0 min(85vw,320px);scroll-snap-align:center}
+  /* Snapping would fight the glide; it comes back as soon as the user touches the strip. */
+  #root .ar-hk-homes.is-gliding{scroll-snap-type:none;scroll-behavior:auto}
+}
+
+/* Partner logos ship with their own white margin — trim the card padding so they read at full size. */
+#root .ar-assoc-card{padding:4px 6px}
+#root .ar-assoc-card img{width:100%;height:100%}
+
+/* Home: property-type tiles — icon instead of a photo. */
+#root .ar-hk-category-tile{position:relative;flex-direction:row;align-items:center;gap:16px;padding:20px 18px;border-radius:20px}
+#root .ar-hk-category-icon{flex:none;display:grid;place-items:center;width:60px;height:60px;border-radius:18px;background:var(--mint);color:var(--emerald);transition:background .3s,color .3s,transform .4s var(--ease)}
+#root .ar-hk-category-tile:hover .ar-hk-category-icon{background:var(--gold-foil);color:var(--emerald);transform:rotate(-6deg)}
+#root .ar-hk-category-text{display:grid;gap:3px;min-width:0}
+#root .ar-hk-category-text b{color:var(--ink);font:400 21px/1.15 var(--serif)}
+#root .ar-hk-category-text small{color:var(--muted);font-size:12.5px;line-height:1.4}
+#root .ar-hk-category-text em{margin-top:4px;color:var(--gold-ink);font:700 10.5px var(--sans);font-style:normal;letter-spacing:.1em;text-transform:uppercase}
+#root .ar-hk-category-go{position:absolute;top:14px;right:14px;color:var(--gold-ink);transition:transform .3s var(--ease)}
+#root .ar-hk-category-tile:hover .ar-hk-category-go{transform:translate(2px,-2px)}
+@media (max-width:767px){
+  /* Four compact tiles fit as a 2 × 2 grid — no sideways swipe needed. */
+  #root .ar-hk-category-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-inline:0;padding:4px 0 12px;overflow:visible}
+  #root .ar-hk-category-tile{flex-direction:column;align-items:flex-start;gap:12px;padding:16px 14px}
+  #root .ar-hk-category-icon{width:48px;height:48px;border-radius:14px}
+  #root .ar-hk-category-icon svg{width:24px;height:24px}
+  #root .ar-hk-category-text b{font-size:18px}
+  #root .ar-hk-category-text small{display:none}
+  #root .ar-hk-category-text em{margin-top:2px;font-size:10px}
 }

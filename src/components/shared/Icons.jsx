@@ -29,6 +29,7 @@ export const OrbitIcon = props => <Svg {...props}><ellipse cx="12" cy="12" rx="9
 export const DownloadIcon = props => <Svg {...props}><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></Svg>
 export const ChatIcon = props => <Svg {...props}><path d="M4.5 5.5h15A2.5 2.5 0 0 1 22 8v8a2.5 2.5 0 0 1-2.5 2.5H10l-5.5 3v-3.2A2.5 2.5 0 0 1 2 16V8a2.5 2.5 0 0 1 2.5-2.5Z"/><path d="M7 11h10M7 14h7"/></Svg>
 
+export const WhatsAppIcon = props => <Svg {...props}><path d="M4.5 19.5 5.6 15.8A8.2 8.2 0 1 1 8.4 18.5Z"/><path d="M9.2 8.6c.2-.5.5-.5.8-.5h.5c.2 0 .4.1.5.4l.6 1.5c.1.2 0 .5-.1.6l-.5.6a5.7 5.7 0 0 0 2.6 2.4l.6-.6c.2-.2.4-.2.6-.1l1.5.7c.3.1.4.3.4.5v.5c0 .4-.2.7-.6.9-.6.3-1.5.4-2.4.1a8.6 8.6 0 0 1-4.6-4.5c-.3-.9-.2-1.8.1-2.5Z"/></Svg>
 export const UsersIcon = props => <Svg {...props}><circle cx="9" cy="8" r="3.2"/><path d="M3.5 19.5a5.5 5.5 0 0 1 11 0M15.5 5.2a3 3 0 0 1 0 5.6M17.5 14.2a5 5 0 0 1 3 5.3"/></Svg>
 export const AwardIcon = props => <Svg {...props}><circle cx="12" cy="9" r="5.5"/><path d="m9 13.8-1.5 7 4.5-2.4 4.5 2.4-1.5-7"/></Svg>
 // Amenity icons (property detail page).

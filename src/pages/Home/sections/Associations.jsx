@@ -1,23 +1,27 @@
-// Mock wordmark logos (inline SVG) until the real partner artwork is supplied —
-// swap `logo` for an imported image file per partner.
-const wordmark = (name, tagline, color) => {
-  const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 80"><text x="110" y="${tagline ? 42 : 50}" text-anchor="middle" font-family="Georgia,serif" font-size="${name.length > 9 ? 22 : 28}" font-weight="700" letter-spacing="1.5" fill="${color}">${name}</text>${tagline ? `<text x="110" y="64" text-anchor="middle" font-family="Arial,sans-serif" font-size="11" letter-spacing="3" fill="${color}" opacity=".75">${tagline}</text>` : ''}</svg>`
-  return `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`
-}
+import oneOak from '../../../assets/partners/1oak.webp'
+import eldeco from '../../../assets/partners/eldeco.webp'
+import excella from '../../../assets/partners/excella.webp'
+import experion from '../../../assets/partners/experion.webp'
+import migsun from '../../../assets/partners/migsun-lucknow-central.webp'
+import oranje from '../../../assets/partners/oranje.webp'
+import ord from '../../../assets/partners/ord-constructions.webp'
+import rishita from '../../../assets/partners/rishita-developers.webp'
+import sahuCity from '../../../assets/partners/sahu-city.webp'
+import sapphire from '../../../assets/partners/sapphire.webp'
+import tulip from '../../../assets/partners/tulip-housing.webp'
 
 const partners = [
-  { name: 'ORD Constructions', logo: wordmark('ORD', 'CONSTRUCTIONS', '#1F3B6E') },
-  { name: '1OAK', logo: wordmark('1OAK', '', '#111111') },
-  { name: 'Tulip Housing', logo: wordmark('Tulip', 'HOUSING', '#C2185B') },
-  { name: 'Sahu City', logo: wordmark('SAHU CITY', '', '#8C302D') },
-  { name: 'Sapphire', logo: wordmark('Sapphire', '', '#1565C0') },
-  { name: 'Experion', logo: wordmark('EXPERION', '', '#0B3A27') },
-  { name: 'Excella', logo: wordmark('Excella', '', '#3884B7') },
-  { name: 'Migsun Lucknow Central', logo: wordmark('MIGSUN', 'LUCKNOW CENTRAL', '#B71C1C') },
-  { name: 'Rishita Developers', logo: wordmark('rishita', 'DEVELOPERS', '#6F4C85') },
-  { name: 'Omaxe', logo: wordmark('OMAXE', '', '#B84331') },
-  { name: 'Eldeco', logo: wordmark('ELDECO', '', '#0D47A1') },
-  { name: 'Oranje', logo: wordmark('ORANJE', '', '#E65100') },
+  { name: 'ORD Constructions', logo: ord },
+  { name: '1OAK', logo: oneOak },
+  { name: 'Tulip Housing', logo: tulip },
+  { name: 'Sahu City', logo: sahuCity },
+  { name: 'Sapphire', logo: sapphire },
+  { name: 'Experion', logo: experion },
+  { name: 'Excella', logo: excella },
+  { name: 'Migsun Lucknow Central', logo: migsun },
+  { name: 'Rishita Developers', logo: rishita },
+  { name: 'Eldeco', logo: eldeco },
+  { name: 'Oranje', logo: oranje },
 ]
 
 function LogoRow({ hidden }) {

@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
 // Pointer-driven polish for mouse users: a gold spotlight that follows the cursor across
 // cards, magnetic gold buttons, and a trailing gold cursor ring. Styles live in experience.css.
@@ -8,11 +8,23 @@ const INTERACTIVE = 'a, button, [role="tab"], label, select, summary'
 const PULL = 0.28
 const MAX_PULL = 10
 
-const finePointer = () => window.matchMedia?.('(hover: hover) and (pointer: fine)').matches && !window.matchMedia('(prefers-reduced-motion: reduce)').matches
+const FINE_POINTER = '(hover: hover) and (pointer: fine)'
+const finePointer = () => Boolean(window.matchMedia?.(FINE_POINTER).matches) && !window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
 export function useExperience() {
+  const [enabled, setEnabled] = useState(finePointer)
+  // Re-check when the input type changes (DevTools device mode, a tablet docked to a keyboard…),
+  // so the ring never lingers on a touch screen.
   useEffect(() => {
-    if (!finePointer()) return undefined
+    const query = window.matchMedia?.(FINE_POINTER)
+    if (!query) return undefined
+    const update = () => setEnabled(finePointer())
+    query.addEventListener('change', update)
+    return () => query.removeEventListener('change', update)
+  }, [])
+
+  useEffect(() => {
+    if (!enabled) return undefined
     const ring = document.createElement('div')
     ring.className = 'ar-cursor'
     ring.setAttribute('aria-hidden', 'true')
@@ -76,8 +88,9 @@ export function useExperience() {
       document.removeEventListener('pointerup', lift)
       document.documentElement.removeEventListener('pointerleave', leave)
       cancelAnimationFrame(frame)
+      if (magnet) magnet.style.translate = ''
       ring.remove()
       document.documentElement.classList.remove('has-cursor-ring')
     }
-  }, [])
+  }, [enabled])
 }

@@ -29,12 +29,14 @@ const HEADING = 'h1, h2'
 // Photos scale down from 1.15 inside their overflow-hidden frame.
 const IMAGES = 'main img'
 
-// Never animate overlays, the hero carousel (it has its own entrance) or 360° viewer internals.
-const EXCLUDE = '.preloader, .header, .ar-header, .hero, .modal-backdrop, .ar-modal-backdrop, .vt-canvas, .vt-stage'
+// Never animate overlays, fixed bottom bars, the hero carousel (it has its own entrance) or 360° viewer internals.
+const EXCLUDE = '.preloader, .header, .ar-header, .hero, .modal-backdrop, .ar-modal-backdrop, .vt-canvas, .vt-stage, .ar-pd-leadbar, .ar-mobile-dock, .ar-mobile-cta'
 const STAGGER = 0.1
 const MAX_DELAY = 0.9
 
-const prefersReducedMotion = () => window.matchMedia?.('(prefers-reduced-motion: reduce)').matches
+// Phones and touch tablets skip the reveal: hidden-until-revealed content shows up blank
+// during fast flick scrolling, so there everything simply renders in place.
+const prefersReducedMotion = () => window.matchMedia?.('(prefers-reduced-motion: reduce), (max-width: 767px), (hover: none) and (pointer: coarse)').matches
 
 // Elements go pending → in → done. "done" strips every reveal style, so the
 // element sits in its normal layout and its own hover/transition CSS applies.
